@@ -9,6 +9,7 @@ from flask_admin.contrib.sqla import ModelView
 
 from flask.ext.migrate import Migrate, MigrateCommand, upgrade
 from flask.ext.script import Shell, Manager, prompt_bool
+from flask.ext.script.commands import ShowUrls
 from sqlalchemy import MetaData
 
 from application import application as app
@@ -131,6 +132,7 @@ if __name__ == '__main__':
     get_model_context()  # Make sure all models are referenced so they are included in migrations
     manager.add_default_commands()
     manager.add_command('shell', Shell(make_context=make_shell_context))
+    manager.add_command("list_urls", ShowUrls())
     manager.add_command('db', MigrateCommand)
 
     manager.run()
